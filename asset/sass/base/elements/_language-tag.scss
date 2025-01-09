@@ -1,0 +1,14 @@
+.language {
+    display: inline-flex;
+    align-items: center;
+    background-color: $color__secondary-light;
+    border-radius: 20px;
+    color: $color__black;
+    font-family: $font__body;
+    font-size: $font__xs-size;
+    font-weight: 600;
+    line-height: 1;
+    padding: 5px 10px 7px;
+    vertical-align: top;
+    height: 22px;
+}

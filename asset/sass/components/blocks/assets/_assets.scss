@@ -1,0 +1,25 @@
+.assets {
+    &.inline {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+        @media(min-width: $md) {
+            flex-direction: row;
+        }
+    }
+
+    .asset {
+        position: relative;
+
+        .caption {
+            position: absolute;
+            background-color: $color__complementary;
+            bottom: 0;
+            left: 0;
+            padding: 10px 15px;
+            text-align: left;
+            width: 100%;
+        }
+    }
+}

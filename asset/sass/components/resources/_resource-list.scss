@@ -1,0 +1,48 @@
+.resource-list {
+    height: auto !important;
+    list-style: none;
+    margin-bottom: 50px;
+    padding-left: 0;
+    text-align: left;
+
+    .resource {
+        display: flex;
+        background-color: $color__white;
+        border: 1px solid $color__hr;
+        border-radius: 5px;
+        gap: 15px;
+        margin-bottom: 20px;
+        transform: none !important;
+        width: 100% !important;
+
+        @media (min-width: $lg) {
+            gap: 30px;
+        }
+
+        &::before {
+            content: none !important;
+        }
+
+        &__thumbnail {
+            flex-shrink: 0;
+            line-height: 1;
+            margin: 15px 15px 15px auto;
+            order: 1;
+
+            img {
+                height: 100px;
+                object-fit: cover;
+                width: 100px;
+
+                @media (min-width: $lg) {
+                    height: 130px;
+                    width: 130px;
+                }
+            }
+        }
+
+        &__content {
+            padding: 15px;
+        }
+    }
+}

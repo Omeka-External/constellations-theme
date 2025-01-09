@@ -1,0 +1,54 @@
+.has-background {
+    background-color: $color__complementary;
+    padding: 30px;
+}
+
+.parallax {
+    position: relative;
+
+    &::before {
+        content: "";
+        background-color: $color__primary;
+        height: 100%;
+        left: 0;
+        opacity: 0.75;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+
+    > div {
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        color: $color__white;
+        padding: 80px 0;
+
+        :is(h1, h2, h3, h4, h5, h6),
+        p {
+            color: $color__white;
+        }
+    }
+
+    &.bg-right > div {
+        background-position: right center;
+    }
+
+    &.bg-left > div {
+        background-position: left center;
+    }
+}
+
+.has-decoration-left {
+    background-image: url("../img/block-decoration-left");
+    background-position: left top;
+    background-repeat: no-repeat;
+}
+
+.has-decoration-right {
+    background-image: url("../img/block-decoration-right");
+    background-position: right top;
+    background-repeat: no-repeat;
+}
+

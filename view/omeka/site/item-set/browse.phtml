@@ -1,0 +1,74 @@
+<?php
+$translate = $this->plugin('translate');
+$escape = $this->plugin('escapeHtml');
+
+$filterLocale = (bool) $this->siteSetting('filter_locale_values');
+$lang = $this->lang();
+
+$this->htmlElement('body')->appendAttribute('class', 'item-set resource browse');
+
+$sortHeadings = [
+    [
+        'label' => $translate('Title'),
+        'value' => 'dcterms:title'
+    ],
+    [
+        'label' => $translate('Identifier'),
+        'value' => 'dcterms:identifier'
+    ],
+    [
+        'label' => $translate('Class'),
+        'value' => 'resource_class_label'
+    ],
+    [
+        'label' => $translate('Created'),
+        'value' => 'created'
+    ],
+];
+?>
+
+<?php echo $this->pageTitle($translate('Item sets'), 1); ?>
+
+<?php echo $this->searchFilters(); ?>
+
+<div class="browse-controls">
+    <?php echo $this->pagination(); ?>
+    <?php echo $this->hyperlink($translate('Advanced search'), $this->url(null, ['action' => 'search'], true), ['class' => 'advanced-search']); ?>
+    <?php echo $this->sortSelector($sortHeadings); ?>
+</div>
+
+<?php $this->trigger('view.browse.before'); ?>
+<div class="resource-list">
+<?php
+$headingTerm = $this->siteSetting('browse_heading_property_term');
+$bodyTerm = $this->siteSetting('browse_body_property_term');
+$bodyTruncate = $this->themeSetting('truncate_body_property');
+foreach ($itemSets as $itemSet):
+    $heading = $headingTerm ? $itemSet->value($headingTerm, ['default' => $translate('[Untitled]'), 'lang' => ($filterLocale ? [$lang, ''] : null)]) : $itemSet->displayTitle(null, ($filterLocale ? [$lang, ''] : null));
+    $body = $bodyTerm ? $itemSet->value($bodyTerm, ['lang' => ($filterLocale ? [$lang, ''] : null)]) : $itemSet->displayDescription(null, ($filterLocale ? [$lang, ''] : null));
+    $thumbnail = $this->thumbnail($itemSet, 'medium');
+    ?>
+        <div class="item-set resource">
+            <!-- Thumbnail -->
+            <?php if ($thumbnail): ?>
+                <div class="resource__thumbnail">
+                    <?php echo $itemSet->linkRaw($thumbnail); ?>
+                </div>
+            <?php endif; ?>
+
+            <!-- Content -->
+            <div class="resource__content">
+                <?php echo $this->ResourceTags($itemSet); ?>
+                <!-- Metadata -->
+                <div class="resource__meta">
+                    <h5><?php echo $itemSet->link($heading); ?></h5>
+                    <?php if ($body): ?>
+                        <div class="description <?php echo ($bodyTruncate) ? $bodyTruncate : ''; ?>"><?php echo $escape($body); ?></div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+<?php endforeach; ?>
+</div>
+<?php $this->trigger('view.browse.after'); ?>
+<?php echo $this->pagination(); ?>

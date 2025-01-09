@@ -1,0 +1,43 @@
+#linked-resources {
+    table {
+        border-collapse: collapse;
+
+        th,
+        td {
+            text-align: left;
+        }
+
+        th {
+            color: $color__headings;
+            font-weight: 500;
+        }
+    }
+
+    .linked-resource-property {
+        background-color: $color__complementary;
+        color: $color__headings;
+        font-size: $font__h4-sm-size;
+        font-weight: 600;
+        margin: 2rem 0 1rem;
+        padding: 10px;
+    }
+
+    .linked-resource {
+        border-bottom: 1px solid $color__hr;
+
+        a {
+            display: flex;
+            align-items: center;
+            flex-wrap: nowrap;
+            gap: 15px;
+            padding: 1rem 0;
+
+            img {
+                flex-shrink: 0;
+                height: 100px;
+                object-fit: cover;
+                width: 100px;
+            }
+        }
+    }
+}

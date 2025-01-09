@@ -1,0 +1,34 @@
+$spacing-values: 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100;
+$breakpoints: (
+    sm: 576px,
+    md: 768px,
+    lg: 1024px
+);
+
+@each $value in $spacing-values {
+    // Default spacing classes (no prefix)
+    @include spacing(p, t, $value); // Padding Top e.g., pt-10
+    @include spacing(p, b, $value); // Padding Bottom
+    @include spacing(p, l, $value); // Padding Left
+    @include spacing(p, r, $value); // Padding Right
+
+    @include spacing(m, t, $value); // Margin Top e.g., mt-10
+    @include spacing(m, b, $value); // Margin Bottom
+    @include spacing(m, l, $value); // Margin Left
+    @include spacing(m, r, $value); // Margin Right
+
+    // Responsive spacing classes
+    @each $breakpoint, $min-width in $breakpoints {
+        @media (min-width: #{$min-width}) {
+            @include spacing(p, t, $value, #{$breakpoint}-); // e.g., sm-pt-10
+            @include spacing(p, b, $value, #{$breakpoint}-);
+            @include spacing(p, l, $value, #{$breakpoint}-);
+            @include spacing(p, r, $value, #{$breakpoint}-);
+
+            @include spacing(m, t, $value, #{$breakpoint}-); // e.g., sm-mt-10
+            @include spacing(m, b, $value, #{$breakpoint}-);
+            @include spacing(m, l, $value, #{$breakpoint}-);
+            @include spacing(m, r, $value, #{$breakpoint}-);
+        }
+    }
+}

@@ -1,0 +1,48 @@
+/* Make sure embeds and iframes fit their containers. */
+embed,
+iframe,
+object {
+    max-width: 100%;
+}
+
+img {
+    height: auto; // Make sure images are scaled correctly.
+    max-width: 100%; // Adhere to container width.
+}
+
+figure {
+    margin: 1em 0; // Extra wide images within figure tags don't overflow the content area.
+}
+
+.decoration {
+    display: inline-block;
+    font-size: 0;
+    position: relative;
+    padding: 10px 0 0 10px;
+
+    &::after {
+        content: "";
+        width: calc(100% - 10px);
+        height: calc(100% - 10px);
+        border-radius: 20px 0;
+        position: absolute;
+        left: 0;
+        top: 0;
+        border: 1px dashed $color__complementary;
+        z-index: 2;
+        pointer-events: none;
+    } 
+
+    img {
+
+
+        @media(min-width: $md) {
+        }
+    }
+
+    &--thumbnail {
+        img {
+            border-radius: 10px 0;
+        }
+    }
+}

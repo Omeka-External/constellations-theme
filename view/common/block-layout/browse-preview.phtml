@@ -1,0 +1,59 @@
+<?php
+$translate = $this->plugin('translate');
+$escape = $this->plugin('escapeHtml');
+$bodyTruncate = $this->themeSetting('truncate_body_property');
+?>
+<div class="preview-block">
+
+    <?php if ($this->heading): ?>
+        <h2><?php echo $this->heading; ?></h2>
+    <?php endif; ?>
+
+    <ul class="resource-list preview">
+        <?php
+        $showThumbnail = in_array('thumbnail', $this->components);
+        $showHeading = in_array('resource-heading', $this->components);
+        $showBody = in_array('resource-body', $this->components);
+        $headingTerm = $this->siteSetting('browse_heading_property_term');
+        $bodyTerm = $this->siteSetting('browse_body_property_term');
+
+        $filterLocale = (bool) $this->siteSetting('filter_locale_values');
+        $lang = $this->lang();
+
+        foreach ($this->resources as $resource):
+            $heading = $headingTerm ? $resource->value($headingTerm, ['default' => $translate('[Untitled]')]) : $resource->displayTitle(null, ($filterLocale ? $lang : null));
+            $body = $bodyTerm ? $resource->value($bodyTerm) : $resource->displayDescription(null, ($filterLocale ? $lang : null));
+            ?>
+            <li class="<?php echo $this->resourceType; ?> resource">
+
+                <!-- Thumbnail -->
+                <?php if ($showThumbnail) : ?>
+                    <div class="resource__thumbnail">
+                        <?php echo $resource->linkRaw($this->thumbnail($resource, 'medium', ['title' => $heading])); ?>
+                    </div>
+                <?php endif; ?>
+
+                <!-- Content -->
+                <div class="resource__content">
+                    <?php
+                    if ($showHeading):
+                        echo $this->ResourceTags($resource);
+                        echo '<h5>' . $resource->link($heading) . '</h5>';
+                    endif;?>
+                    <?php if ($showBody && $body): ?>
+                        <div class="description <?php echo ($bodyTruncate) ?: ''; ?>"><?php echo $escape($body); ?></div>
+                    <?php endif; ?>
+                </div>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+
+    <?php
+    if ($this->linkText):
+        echo $this->hyperlink($this->linkText, $this->url(
+            'site/resource', ['controller' => $this->resourceType, 'action' => 'browse'], ['query' => $this->query], true
+        ), ['class' => 'button btn__icon']);
+    endif;
+    ?>
+
+</div>

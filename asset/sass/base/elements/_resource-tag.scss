@@ -1,0 +1,21 @@
+.resource-tags {
+    display: flex;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+
+    .resource-tag {
+        display: flex;
+        font-family: $font__body-display;
+        align-items: center;
+        color: $color__black;
+        background-color: $color__gray-95;
+        border-radius: 5px;
+        font-size: $font__xs-size;
+        font-weight: 400;
+        letter-spacing: 1px;
+        padding: 4px 10px 7px;
+        line-height: 1;
+    }
+}

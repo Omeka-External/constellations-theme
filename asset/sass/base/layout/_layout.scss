@@ -1,0 +1,83 @@
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+html {
+    scroll-padding-top: 133px;
+}
+
+body {
+    padding-top: 133px;
+
+    @media (min-width: $lg) {
+        padding-top: 160px;
+    }
+
+    &.items.search,
+    &.item-sets.search {
+        overflow-x: initial;
+    }
+}
+
+.container {
+    @include container;
+}
+
+.narrow-container {
+    @include container;
+    max-width: 760px;
+}
+
+.medium-container {
+    @include container;
+    max-width: 1140px;
+}
+
+.wide-container {
+    @include container;
+    max-width: 100vw;
+
+    @media (min-width: $xl) {
+        padding: 0 50px;
+    }
+}
+
+.fullwidth {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+}
+
+#main-content {
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+
+    @media (min-width: $lg) {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+
+    body.items.search &,
+    body.item-sets.search & {
+        @media (min-width: $lg) {
+            max-width: 1160px;
+            padding: 3rem 10rem 4rem 4rem;
+        }
+
+        @media (min-width: $xl) {
+            max-width: 1160px;
+            padding: 3rem 10rem 4rem;
+        }
+    }
+
+    .blocks > div {
+        margin-bottom: 50px;
+    }
+
+    .blocks > .has-background:last-child,
+    .blocks > .parallax:last-child {
+        margin-bottom: -4rem;
+    }
+}
+
+@import "regions";

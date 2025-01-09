@@ -1,0 +1,15 @@
+.left.file, .left.assets {
+    margin: 0 0 1rem 0 !important;
+
+    @media (min-width: $md) {
+        margin: 0 3rem 1rem 0 !important;
+    }
+}
+
+.right.file, .right.assets {
+    margin: 0 0 1rem 0 !important;
+
+    @media (min-width: $md) {
+        margin: 0 0 1rem 3rem !important;
+    }
+}

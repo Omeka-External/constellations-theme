@@ -1,0 +1,78 @@
+.pagination {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin: 30px 0;
+    width: 100%;
+
+    .pager-wrapper {
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+        gap: 1rem;
+
+        @media (min-width: $sm) {
+            gap: 1.5rem;
+        }
+    }
+
+    input[type=text] {
+        display: inline-block;
+        margin: 0 0 0 0.5rem !important;
+        padding: 8px 10px;
+        text-align: center;
+        width: auto;
+        border-radius: 5px;
+
+        @media (min-width: $sm) {
+            padding: 8px 10px;
+            border-radius: 5px;
+        }
+    }
+
+    input[type=submit] {
+        @include primary-button-filled;
+        padding: 7px 15px;
+
+        @media (min-width: $sm) {
+            padding: 7px 20px;
+        }
+    }
+
+    .row-count {
+        color: $color__secondary-text;
+        font-size: $font__sm-size;
+        margin-right: 1rem;
+    }
+
+    .pager {
+        label,
+        .page-count {
+            color: $color__secondary-text;
+            font-size: 1rem;
+            margin-right: 0.5rem;
+        }
+    }
+
+    .button {
+        @include primary-button;
+        display: flex;
+        align-items: center;
+        border-radius: 50%;
+        flex-shrink: 0;
+        font-size: 1.4rem;
+        height: 40px;
+        justify-content: center;
+        padding: 0;
+        position: relative;
+        width: 40px;
+
+        &.disabled {
+            border-color: $color__disabled;
+            color: $color__disabled;
+            cursor: default;
+        }
+    }
+}

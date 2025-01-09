@@ -1,0 +1,114 @@
+button,
+.button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+    @include button;
+
+    &:not(.link-style, .main-search-button) {
+        @include primary-button;
+
+        &.btn__primary-filled {
+            @include primary-button-filled;
+        }
+
+        &.btn__secondary {
+            @include secondary-button;
+        }
+    }
+
+    &.link-style {
+        @include link-style;
+    }
+
+    &.btn__icon {
+        padding-right: 35px;
+
+        &::after {
+            @include font-awesome;
+            content: "\f054" !important;
+            display: flex;
+            align-items: center;
+            background-color: $color__buttons;
+            border: 1px solid $color__buttons;
+            border-radius: 50%;
+            bottom: 0;
+            color: $color__white;
+            font-size: 1rem;
+            height: 35px;
+            justify-content: center;
+            margin: auto;
+            position: absolute;
+            right: -17px;
+            top: 0;
+            transition: all 0.3s ease;
+            width: 35px;
+        }
+
+        &:hover:not(.disabled) {
+            &::after {
+                background-color: $color__white;
+                color: $color__buttons;
+            }
+        }
+
+        &:focus {
+            &::after {
+                background-color: $color__white;
+                color: $color__buttons;
+            }
+        }
+
+        &.btn__secondary {
+            &::after {
+                background-color: $color__secondary;
+                border: 1px solid $color__secondary;
+                color: $color__white;
+            }
+
+            &:hover:not(.disabled) {
+                &::after {
+                    background-color: $color__primary;
+                    color: $color__white;
+                }
+            }
+
+            &:focus {
+                &::after {
+                    background-color: $color__white;
+                    color: $color__buttons;
+                }
+            }
+        }
+    }
+}
+
+button.add-value,
+button.remove-value {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $color__white;
+    border: 1px solid $color__hr;
+    border-radius: 50%;
+    cursor: pointer;
+    color: $color__primary;
+    width: 35px;
+    height: 35px;
+    margin-top: 10px;
+    padding: 5px 9px;
+    text-transform: uppercase;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    flex-shrink: 0;
+
+    &:hover,
+    &:focus {
+        background-color: $color__accent !important;
+        color: $color__white !important;
+    }
+}
+
+.button {
+    cursor: pointer;
+}

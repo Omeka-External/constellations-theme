@@ -1,0 +1,39 @@
+// Colors
+$color__primary: #1C3867;
+$color__primary-dark: #162b50;
+$color__secondary: #98DAF5;
+$color__secondary-dark: #1D50A3;
+$color__secondary-light: #E7F6FD;
+$color__accent: #B65627;
+$color__accent-dark: #9a4a23;
+$color__complementary: #F9F6F5;
+$color__success: #1DA63B;
+$color__warning: #EE810D;
+$color__error: #DD001B;
+
+// Grayscale
+$color__black: #231f20;
+$color__gray-33: #555;
+$color__gray-40: #666;
+$color__gray-47: #777;
+$color__gray-60: #999;
+$color__gray-67: #aaa;
+$color__gray-80: #ccc;
+$color__gray-87: #ddd;
+$color__gray-93: #ececec;
+$color__gray-95: #f3f3f3;
+$color__white: #fff;
+
+//Applications
+$color__bg-body: $color__white;
+$color__headings: $color__primary;
+$color__main-text: $color__black;
+$color__secondary-text: $color__gray-40;
+$color__buttons: $color__accent;
+$color__buttons-dark: $color__accent-dark;
+$color__icons: $color__primary;
+$color__link: $color__accent;
+$color__menu-drawer: $color__white;
+$color__hr: $color__gray-87;
+$color__light-bg: $color__gray-95;
+$color__disabled: $color__gray-80;

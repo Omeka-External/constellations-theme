@@ -1,0 +1,197 @@
+.main-footer{
+    .footer-top {
+        background-color: $color__complementary;
+        padding-bottom: 80px;
+        padding-top: 80px;
+
+        &-container {
+            @media (min-width: $xl) {
+                display: flex;
+
+                > * {
+                    width: 50%;
+                }
+            }
+        }
+    }
+
+    .footer-middle {
+        background-color: $color__primary-dark;
+        padding-bottom: 50px;
+        padding-top: 50px;
+
+        > *,
+        :is(h1, h2, h3, h4, h5, h6),
+        ul li::marker,
+        p,
+        a {
+            color: $color__white;
+        }
+
+        h6 {
+            font-size: 1rem;
+        }
+
+        .navigation {
+            column-count: 2;
+            list-style-position: inside;
+            margin-bottom: 0;
+            padding-left: 0;
+            text-align: left;
+
+            @media (min-width: $xl) {
+                padding-left: 20px;
+            }
+
+        }
+
+        &-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10%;
+            max-width: 800px;
+            padding: 0 40px;
+
+            &-left {
+                margin-bottom: 50px;
+                text-align: center;
+                width: 100%;
+            }
+
+            &-center {
+                margin-bottom: 50px;
+            }
+
+            &-center,
+            &-right {
+                width: 100%;
+
+                h6 {
+                    margin-bottom: 2.5rem;
+                    text-align: center;
+                }
+            }
+
+            @media (min-width: $sm) {
+                &-center,
+                &-right {
+                    width: 45%;
+
+                    h6 {
+                        margin-bottom: 1rem;
+                        text-align: left;
+                    }
+                }
+            }
+
+            @media (min-width: $xl) {
+                flex-wrap: nowrap;
+                max-width: 1440px;
+
+                &-left {
+                    margin-bottom: 0;
+                    text-align: initial;
+                    width: 38%;
+                }
+
+                &-center,
+                &-right {
+                    margin: 0;
+                    width: 31%;
+                }
+            }
+        }
+
+        &-social-network {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            flex-shrink: 0;
+            gap: 30px;
+            justify-content: center;
+
+            @media (min-width: $sm) {
+                justify-content: flex-start;
+            }
+
+            a {
+                display: flex;
+                align-items: center;
+                border: 1px solid $color__white;
+                border-radius: 50%;
+                justify-content: center;
+                height: 40px;
+                text-decoration: none;
+                width: 40px;
+            }
+
+            + h6 {
+                margin-top: 50px;
+
+                @media (min-width: $sm) {
+                    margin-top: 0;
+                }
+            }
+        }
+
+        &-contact-info {
+            margin-bottom: 0;
+            padding-left: 0;
+            text-align: center;
+            list-style: none;
+
+            @media (min-width: $sm) {
+                list-style: initial;
+                list-style-position: inside;
+                text-align: left;
+            }
+
+            @media (min-width: $xl) {
+                padding-left: 20px;
+            }
+        }
+    }
+
+    .footer-bottom {
+        background-color: $color__primary;
+        color: $color__white;
+        padding-bottom: 30px;
+        padding-top: 30px;
+
+        @media (min-width: $xl) {
+            padding-bottom: 20px;
+            padding-top: 20px;
+        }
+
+        a {
+            color: $color__white;
+        }
+
+        &-container {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            font-size: 1rem;
+            gap: 20px;
+            text-align: center;
+
+            @media (min-width: $xl) {
+                flex-direction: row;
+                text-align: initial;
+            }
+        }
+
+        &-links {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-left: 0;
+            order: -1;
+
+            @media (min-width: $xl) {
+                margin-left: auto;
+                order: initial;
+            }
+        }
+    }
+}

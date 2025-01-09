@@ -1,0 +1,34 @@
+<?php
+$translate = $this->plugin('translate');
+$item = $media->item();
+
+$this->htmlElement('body')->appendAttribute('class', 'media resource show');
+
+$resource_tags = $this->themeSetting('resource_tags'); ?>
+
+<?php echo $this->ResourceTags($media); ?>
+<?php echo $this->pageTitle($media->displayTitle(), 1); ?>
+
+<?php if (!is_array($resource_tags) || !(in_array('resource_type', $resource_tags) || in_array('resource_class', $resource_tags))) : ?>
+    <h3><?php echo $translate('Media'); ?></h3>
+<?php endif; ?>
+<?php $this->trigger('view.show.before'); ?>
+
+<div class="regions-container">
+    <div class="half-region">
+        <?php echo $media->render(); ?>
+    </div>
+    <div class="half-region">
+        <div class="metadata">
+            <div class="property">
+                <h4><?php echo $translate('Part of'); ?></h4>
+                <div class="value">
+                    <?php echo $item->link($item->displayTitle()); ?>
+                </div>
+            </div>
+            <?php echo $media->displayValues(); ?>
+        </div>
+    </div>
+</div>
+
+<?php $this->trigger('view.show.after'); ?>

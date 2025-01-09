@@ -1,0 +1,46 @@
+<?php
+$translate = $this->plugin('translate');
+$esc_html = $this->plugin('escapeHtml');
+
+$filterLocale = (bool) $this->siteSetting('filter_locale_values');
+$lang = $this->lang();
+$valueLang = $filterLocale ? [$lang, ''] : null;
+$bodyTerm = $this->siteSetting('browse_body_property_term');
+$bodyTruncate = $this->themeSetting('truncate_body_property');
+?>
+
+<div class="item-showcase">
+    <?php foreach ($attachments as $attachment): ?>
+        <div class="item resource">
+            <?php
+            $item = $attachment->item();
+            $caption = $attachment->caption();
+            $body = $bodyTerm ? $item->value($bodyTerm) : $item->displayDescription(null, ($valueLang));
+            if ($item):
+            ?>
+                <?php
+                $media = $attachment->media() ?: $item->primaryMedia();
+                if ($media):
+                    $mediaClass = 'item-showcase__media';
+                    echo $item->linkRaw($this->thumbnail($media, 'large'), null, ['class' => $mediaClass]);
+                endif;
+                ?>
+                <div class="item-showcase__content">
+                    <?php echo $this->ResourceTags($item); ?>
+                    <div class="item-showcase__text">
+                        <?php $showTitleOption = $this->showTitleOption; ?>
+                        <?php if ($showTitleOption == 'item_title'): ?>
+                            <h6><?php echo $item->link($item->displayTitle()); ?></h6>
+                        <?php elseif ($showTitleOption == 'file_name'): ?>
+                            <h6><?php echo $media->displayTitle(); ?></h6>
+                        <?php endif; ?>
+
+                        <?php if ($body) : ?>
+                            <div class="description <?php echo $bodyTruncate ?? ''; ?>"><?php echo $esc_html($body); ?></div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+        </div>
+    <?php endforeach; ?>
+</div>

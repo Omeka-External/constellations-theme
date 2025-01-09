@@ -1,0 +1,28 @@
+<?php
+$escHtml = $this->plugin('escapeHtml');
+$escAttr = $this->plugin('escapeHtmlAttr');
+$escUrl = $this->plugin('escapeUrl');
+
+$bannerImage = $this->themeSettingAssetUrl('banner');
+$bannerHeading = $this->themeSetting('banner_heading');
+$bannerDescription = $this->themeSetting('banner_description');
+$bannerButtonLabel = $this->themeSetting('banner_button_label');
+$bannerButtonLink = $this->themeSetting('banner_button_link');
+?>
+
+<div class="main-banner">
+    <?php if ( $bannerImage ) : ?>
+        <img src="<?php echo $this->themeSettingAssetUrl('banner'); ?>" title="Banner">
+    <?php endif; ?>
+    <div class="main-banner-content">
+        <?php if ( $bannerHeading ) : ?>
+            <h1><?php echo $escHtml($bannerHeading); ?></h1>
+        <?php endif; ?>
+        <?php if ( $bannerDescription ) : ?>
+            <p><?php echo $escHtml($bannerDescription); ?></p>
+        <?php endif; ?>
+        <?php if ( $bannerButtonLabel && $bannerButtonLink ) : ?>
+            <a class="button btn__secondary btn__icon" href="<?php echo $escUrl($bannerButtonLink); ?>"><?php echo $escHtml($bannerButtonLabel); ?></a>
+        <?php endif; ?>
+    </div>
+</div>

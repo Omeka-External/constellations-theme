@@ -1,0 +1,49 @@
+/*
+Theme Name: Constellations
+Theme URI: https://github.com/Omeka-External/constellations-theme
+Author: Omeka Team
+Author URI: https://omeka.org/s/
+Description: A Modern Omeka S Theme
+Version: 1.0.0
+Omeka Version Constraint: ^3.2.3
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: LICENSE
+Text Domain: constellations
+*/
+
+/*--------------------------------------------------------------
+# Variables and mixins
+--------------------------------------------------------------*/
+@import "abstracts/abstracts";
+
+/*--------------------------------------------------------------
+# Generic
+--------------------------------------------------------------*/
+
+/* Normalize
+--------------------------------------------- */
+@import "generic/normalize";
+
+/* Box sizing
+--------------------------------------------- */
+@import "generic/box-sizing";
+
+/* Collapse
+--------------------------------------------- */
+@import "generic/collapse";
+
+/*--------------------------------------------------------------
+# Base
+--------------------------------------------------------------*/
+@import "base/base";
+
+/*--------------------------------------------------------------
+# Components
+--------------------------------------------------------------*/
+@import "components/components";
+
+/*--------------------------------------------------------------
+# Utilities
+--------------------------------------------------------------*/
+@import "utilities/utilities";

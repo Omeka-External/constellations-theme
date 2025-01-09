@@ -1,0 +1,168 @@
+// Center block
+@mixin center-block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+// Column width with margin
+@mixin column-width($numberColumns: 3) {
+    width: map-get($columns, $numberColumns) - ( ( $columns__margin * ( $numberColumns - 1 ) ) / $numberColumns );
+}
+
+// Container mixin
+@mixin container {
+    width: 100%;
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 15px;
+    position: relative;
+    
+    @media (min-width: $md) {
+        padding: 0 30px;
+    }
+}
+
+@mixin clearfix {
+    &::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+}
+
+@mixin font-awesome {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+}
+
+@mixin button {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border: 1px solid $color__buttons;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 8px 30px;
+    position: relative;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+@mixin primary-button {
+    background-color: transparent;
+    color: $color__buttons;
+    
+    &:hover:not(.disabled) {
+        background-color: $color__buttons;
+        color: $color__white;
+    }
+    
+    &:focus {
+        color: $color__buttons;
+        outline: 5px auto Highlight;
+    }
+    
+    &:disabled,
+    &[disabled]
+    &.disabled {
+        background-color: $color__disabled;
+        cursor: default;
+    }
+    
+    &:visited {
+        color: $color__buttons;
+    }
+}
+
+@mixin primary-button-filled {
+    background-color: $color__buttons;
+    border: none;
+    color: $color__white;
+
+    &:hover:not(.disabled) {
+        background-color: $color__buttons-dark;
+    }
+
+    &:focus {
+        background-color: $color__buttons-dark;
+        outline: 5px auto Highlight;
+    }
+
+    &:visited {
+        background-color: $color__buttons;
+        color: $color__white;
+    }
+}
+
+@mixin secondary-button {
+    border: 1px solid $color__secondary;
+    color: $color__secondary;
+
+    &:hover:not(.disabled) {
+        background-color: $color__secondary;
+        color: $color__primary;
+    }
+
+    &:focus {
+        color: $color__white;
+        outline: 5px auto Highlight;
+    }
+}
+
+@mixin link-style {
+    display: flex;
+    align-items: center;
+    background-color: transparent !important;
+    border: none;
+    border-bottom: 1px solid $color__buttons;
+    border-radius: 0;
+    color: $color__link;
+    font-family: $font__body-display;
+    font-weight: 400;
+    padding: 2px 0;
+    text-decoration: none;
+
+    &::after {
+        @include font-awesome;
+        content: "\f054" !important;
+        display: inline-block;
+        font-size: 0.8rem;
+        margin-left: 8px;
+        padding-top: 4px;
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+        color: $color__link;
+    }
+}
+
+// Function to map shorthand properties to full property names
+@function map-property($property) {
+    @if $property == 'p' { @return 'padding'; }
+    @else if $property == 'm' { @return 'margin'; }
+    @else { @return ''; } // Fallback for invalid property
+}
+
+// Function to map shorthand directions to full property names
+@function map-direction($direction) {
+    @if $direction == 't' { @return 'top'; }
+    @else if $direction == 'b' { @return 'bottom'; }
+    @else if $direction == 'l' { @return 'left'; }
+    @else if $direction == 'r' { @return 'right'; }
+    @else { @return ''; } // Fallback for invalid direction
+}
+
+// Mixin for spacing classes
+@mixin spacing($property, $direction, $value, $prefix: null) {
+    $full-property: map-property($property);
+    $full-direction: map-direction($direction);
+    @if $full-direction != '' and $full-property != '' {
+        .#{$prefix}#{$property}#{$direction}-#{$value} {
+            #{$full-property}-#{$full-direction}: #{$value}px !important;
+        }
+    }
+}

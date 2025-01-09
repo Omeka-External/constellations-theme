@@ -1,0 +1,126 @@
+#advanced-search {
+    max-width: 840px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25px;
+    overflow: auto;
+
+    &::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    .items.search &,
+    .item-sets.search & {
+        overflow: initial;
+
+        &::after {
+            content: none;
+        }
+
+        .advanced-search-content {
+            @media (min-width: $lg) {
+                margin-bottom: -128px;
+            }
+        }
+    }
+
+    .field-meta {
+        .expand,
+        .collapse {
+            padding: 0 10px;
+        }
+    }
+
+    #sort {
+        .inputs {
+            display: flex;
+        }
+    }
+
+    .numeric-toggle-time {
+        align-items: center;
+        border: 1px solid $color__hr;
+        border-radius: 50%;
+        height: 35px;
+        justify-content: center;
+        width: 35px;
+
+        &::before {
+            line-height: 1;
+            margin-right: 0;
+        }
+
+        input[type="checkbox"] {
+            display: none;
+        }
+    }
+
+    #numeric-greater-than,
+    #numeric-less-than {
+        .inputs {
+            flex-wrap: wrap;
+
+            @media (min-width: $lg) {
+                flex-wrap: nowrap;
+            }
+        }
+    }
+
+    #page-actions {
+        display: flex;
+        background-color: $color__complementary;
+        bottom: 0;
+        box-shadow: rgba(0, 0, 0, 0.11) 0px -2px 5px 2px;
+        gap: 20px;
+        justify-content: center;
+        margin-left: calc((100vw - 100%) / -2);
+        padding: 25px;
+        position: -webkit-sticky;
+        position: sticky;
+        width: 100vw;
+
+        @media (min-width: $lg) {
+            align-items: flex-end;
+            background-color: transparent;
+            bottom: 15px;
+            box-shadow: none;
+            flex-direction: column;
+            gap: 15px;
+            justify-content: initial;
+            margin-left: 0;
+            margin-right: -140px;
+            padding: 0;
+            width: auto;
+        }
+
+        > * {
+            margin-bottom: 0 !important;
+            text-align: center;
+            width: 120px;
+        }
+    }
+}
+
+.search-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 2rem;
+
+    .filter {
+        background-color: $color__secondary;
+        border-radius: 5px;
+        color: $color__main-text;
+        padding: 2px 10px;
+    }
+
+    .filter-label::after {
+        content: ":";
+    }
+
+    .filter-value {
+        font-weight: 400;
+    }
+}

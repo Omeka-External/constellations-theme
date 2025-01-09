@@ -1,0 +1,87 @@
+.tl-timeline {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: $font__headings !important;
+        font-size: 2rem !important;
+        text-transform: none !important;
+    }
+
+    p {
+        color: $color__main-text !important;
+    }
+
+    .tl-text-headline-container {
+        .tl-headline-date,
+        h3.tl-headline-date {
+            color: $color__secondary-text;
+            font-family: $font__body !important;
+            font-size: 1rem !important;
+            text-transform: none !important;
+        }
+    }
+
+    .tl-slidenav-next,
+    .tl-slidenav-previous,
+    .tl-message,
+    .tl-timegroup-message {
+        font-family: $font__body !important;
+        text-transform: none !important;
+    }
+
+    .tl-slidenav-next,
+    .tl-slidenav-previous {
+        &:hover,
+        &:focus-visible {
+            .tl-slidenav-icon::before {
+                background-color: $color__buttons;
+                color: $color__white;
+            }
+        }
+
+        &:focus {
+            outline: none;
+        }
+
+        .tl-slidenav-icon::before {
+            @include font-awesome;
+            display: flex;
+            align-items: center;
+            background-color: transparent;
+            border: 1px solid $color__buttons;
+            border-radius: 50%;
+            color: $color__buttons;
+            font-size: 25px;
+            height: 40px;
+            justify-content: center;
+            line-height: 1;
+            transition: all 0.3s ease;
+            width: 40px;
+        }
+    }
+
+    .tl-slidenav-previous:hover,
+    .tl-slidenav-previous:focus-visible {
+        .tl-slidenav-icon {
+            margin-left: 0;
+        }
+    }
+
+    .tl-slidenav-next:hover,
+    .tl-slidenav-next:focus-visible {
+        .tl-slidenav-icon {
+            margin-left: 76px;
+        }
+    }
+
+    .tl-slidenav-previous .tl-slidenav-icon::before {
+        content: "\f053";
+    }
+
+    .tl-slidenav-next .tl-slidenav-icon::before {
+        content: "\f054";
+    }
+}

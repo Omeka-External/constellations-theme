@@ -1,0 +1,131 @@
+<?php
+$escHtml = $this->plugin('escapeHtml');
+$escAttr = $this->plugin('escapeHtmlAttr');
+$escUrl  = $this->plugin('escapeUrl');
+
+$footerSearchText   = $this->themeSetting( 'footer_search_text' ) ?? '';
+$footerLogo         = $this->themeSetting( 'footer_logo' ) ?? '';
+$footerSiteInfo     = $this->themeSetting( 'footer_site_info' ) ?? '';
+$footerCopyright    = $this->themeSetting( 'footer_copyright' ) ?? '';
+$footerTermsLabel   = $this->themeSetting( 'footer_terms_label' ) ?? '';
+$footerTermsLink    = $this->themeSetting( 'footer_terms_link' ) ?? '';
+$footerPrivacyLabel = $this->themeSetting( 'footer_privacy_label' ) ?? '';
+$footerPrivacyLink  = $this->themeSetting( 'footer_privacy_link' ) ?? '';
+$footerPhone        = $this->themeSetting('contact_info_phone') ?? '';
+$footerEmail        = $this->themeSetting('contact_info_email') ?? '';
+$socialNetworks     = array( 'facebook', 'twitter', 'linkedin', 'instagram', 'youtube', 'mastodon' );
+
+$hasSocialNetworks = false;
+
+foreach ( $socialNetworks as $social_network ) {
+    if ( $this->themeSetting( "{$social_network}_url" ) ) {
+        $hasSocialNetworks = true;
+        break;
+    }
+}
+?>
+
+<footer class="main-footer">
+    <div class="footer-top has-decoration-left">
+        <div class="footer-top-container medium-container">
+            <?php if ($footerSearchText) : ?>
+                <div>
+                    <?php echo $footerSearchText; ?>
+                </div>
+            <?php endif; ?>
+            <div class="content-search">
+                <?php echo $this->partial('common/search-form'); ?>
+                <a class="button link-style" href="<?php echo $site->url() . '/item/search'; ?>">Advanced Search</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-middle">
+        <div class="footer-middle-container container">
+            <div class="footer-middle-container-left">
+                <?php if ($footerLogo) : ?>
+                    <img
+                        src="<?php echo $this->themeSettingAssetUrl( 'footer_logo' ); ?>"
+                        alt="<?php echo $escHtml( $site->title() ); ?>"
+                        class="<?php echo $footerSiteInfo ? 'mb-30' : ''; ?>"
+                    />
+                <?php endif; ?>
+
+                <?php if ($footerSiteInfo) : ?>
+                    <div>
+                        <?php echo $footerSiteInfo; ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+
+            <div class="footer-middle-container-center">
+                <h6>Menu</h6>
+                <?php
+                echo $site->publicNav()->menu()->renderMenu(null, [
+                    'maxDepth' => 0
+                ]);
+                ?>
+            </div>
+
+            <div class="footer-middle-container-right">
+                <?php if ($hasSocialNetworks) : ?>
+                    <h6>Follow Us</h6>
+                    <div class="footer-middle-social-network <?php echo $footerPhone || $footerEmail ? 'mb-30' : ''; ?>">
+                        <?php foreach ( $socialNetworks as $social_network ) : ?>
+                            <?php if ( $social_network_url = $this->themeSetting( "{$social_network}_url" ) ) : ?>
+                                <a href="<?php echo $social_network_url; ?>" target="_blank">
+                                    <img src="<?php echo $this->assetUrl( "img/{$social_network}.svg" ); ?>"
+                                         alt="<?php echo $escAttr( $social_network ); ?>">
+                                </a>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
+
+                <?php if($footerPhone || $footerEmail) : ?>
+                    <h6>Contact Us</h6>
+                    <ul class="footer-middle-contact-info">
+                        <?php if ($footerEmail) : ?>
+                            <li><a href="mailto:<?php echo $footerEmail; ?>"><?php echo $footerEmail; ?></a></li>
+                        <?php endif; ?>
+                        <?php if ($footerPhone) : ?>
+                            <?php $cleanPhoneNumber = preg_replace('/[^\d+]/', '', $footerPhone); ?>
+                            <li><a href="tel:<?php echo $cleanPhoneNumber; ?>"><?php echo $footerPhone; ?></a></li>
+                        <?php endif; ?>
+                    </ul>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <div class="footer-bottom-container container">
+            <div class="footer-bottom-copyright">
+                © <?php echo date('Y'); ?>
+                <?php if ( $footerCopyright ) : ?>
+                    <?php echo $footerCopyright; ?>
+                <?php else: ?>
+                    <?php echo $this->translate( 'Powered by Omeka S' ); ?>
+                <?php endif; ?>
+            </div>
+
+            <div class="footer-bottom-links">
+                <?php if ($footerTermsLabel && $footerTermsLink) : ?>
+                    <a href="<?php echo $escUrl($footerTermsLink); ?>"><?php echo $escHtml($footerTermsLabel); ?></a>
+                <?php endif; ?>
+
+                <?php if ($footerPrivacyLabel && $footerPrivacyLink) : ?>
+                    <a href="<?php echo $escUrl($footerPrivacyLink); ?>"><?php echo $escHtml($footerPrivacyLabel); ?></a>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+
+<!--    --><?php //if ($hasContactInfo) : ?>
+<!--        --><?php //echo $this->partial('common/footer/footer-contact-info', ['contactInfo' => $contactInfo]); ?>
+<!--    --><?php //endif; ?>
+<!---->
+<!--    --><?php //echo $this->partial('common/footer/footer-top'); ?>
+<!--    --><?php //echo $this->partial('common/footer/footer-bottom'); ?>
+
+</footer>
