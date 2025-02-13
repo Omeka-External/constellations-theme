@@ -29,7 +29,23 @@ $resource_tags = $this->themeSetting('resource_tags');
     </div>
     <div class="main-region">
         <div class="metadata">
+            <?php if ($itemMedia): ?>
+                <?php foreach ($itemMedia as $media): ?>
+                    <?php if ($media->ingester() === 'html'): ?>
+                        <div class="property">
+                            <h4><?php echo $media->displayTitle(); ?></h4>
+                            <div class="values">
+                                <div class="value">
+                                    <?php echo $media->render(); ?>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            <?php endif; ?>
+
             <?php echo $item->displayValues(); ?>
+
             <div class="property">
                 <?php $itemSets = $item->itemSets(); ?>
                 <?php if (count($itemSets) > 0): ?>
@@ -54,9 +70,11 @@ $resource_tags = $this->themeSetting('resource_tags');
                 <div class="property">
                     <dt>Media</dt>
                     <?php foreach ($itemMedia as $media): ?>
-                        <dd class="value">
-                        <?php echo $media->linkPretty(); ?>
-                        </dd>
+                        <?php if ($media->ingester() !== 'html'): ?>
+                            <dd class="value">
+                            <?php echo $media->linkPretty(); ?>
+                            </dd>
+                        <?php endif; ?>
                     <?php endforeach; ?>
                 </div>
             </div>
