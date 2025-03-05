@@ -1,7 +1,6 @@
 <?php
 $escHtml = $this->plugin('escapeHtml');
 $escAttr = $this->plugin('escapeHtmlAttr');
-$escUrl = $this->plugin('escapeUrl');
 
 $bannerImage = $this->themeSettingAssetUrl('banner');
 $bannerHeading = $this->themeSetting('banner_heading');
@@ -22,7 +21,7 @@ $bannerButtonLink = $this->themeSetting('banner_button_link');
             <p><?php echo $escHtml($bannerDescription); ?></p>
         <?php endif; ?>
         <?php if ( $bannerButtonLabel && $bannerButtonLink ) : ?>
-            <a class="button btn__secondary btn__icon" href="<?php echo $escUrl($bannerButtonLink); ?>"><?php echo $escHtml($bannerButtonLabel); ?></a>
+            <a class="button btn__secondary btn__icon" href="<?php echo $bannerButtonLink; ?>"><?php echo $escHtml($bannerButtonLabel); ?></a>
         <?php endif; ?>
     </div>
 </div>

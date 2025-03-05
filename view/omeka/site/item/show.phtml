@@ -9,14 +9,36 @@ $filterLocale = (bool) $this->siteSetting('filter_locale_values');
 $lang = $this->lang();
 
 $resource_tags = $this->themeSetting('resource_tags');
+
+$resourceClassLabel = $item->displayResourceClassLabel();
+
+
+$itemValues = $item->displayValues();
+
+if ($resourceClassLabel === 'Person') {
+    $itemValues = str_replace("\n", "", $itemValues);
+    $itemValues = preg_replace('/\s*(<[^>]+>)\s*/', '$1', $itemValues);
+    $itemValues = str_replace('<h4>Description</h4>', '', $itemValues);
+}
 ?>
 
-<?php echo $this->ResourceTags($item); ?>
-<?php echo $this->pageTitle($item->displayTitle(null, ($filterLocale ? $lang : null)), 1); ?>
+<div class="resource-heading">
+    <?php echo $this->ResourceTags($item); ?>
+    <?php echo $this->pageTitle($item->displayTitle(null, ($filterLocale ? $lang : null)), 1); ?>
 
-<?php if (!is_array($resource_tags) || !(in_array('resource_type', $resource_tags) || in_array('resource_class', $resource_tags))) : ?>
-    <h3><?php echo $translate('Item'); ?></h3>
-<?php endif; ?>
+    <?php if (!is_array($resource_tags) || !(in_array('resource_type', $resource_tags) || in_array('resource_class', $resource_tags))) : ?>
+        <h4><?php echo $translate('Item'); ?></h4>
+    <?php endif; ?>
+
+    <?php if ($resourceClassLabel === 'Person') : ?>
+
+        <?php if ($itemDescription = $item->displayDescription()) : ?>
+            <h4><?php echo $itemDescription; ?></h4>
+        <?php endif; ?>
+
+    <?php endif; ?>
+</div>
+
 <?php $this->trigger('view.show.before'); ?>
 
 <div class="regions-container">
@@ -28,7 +50,7 @@ $resource_tags = $this->themeSetting('resource_tags');
         <?php endif; ?>
     </div>
     <div class="main-region">
-        <div class="metadata">
+        <div class="metadata <?php echo $resourceClassLabel; ?>">
             <?php if ($itemMedia): ?>
                 <?php foreach ($itemMedia as $media): ?>
                     <?php if ($media->ingester() === 'html'): ?>
@@ -44,17 +66,17 @@ $resource_tags = $this->themeSetting('resource_tags');
                 <?php endforeach; ?>
             <?php endif; ?>
 
-            <?php echo $item->displayValues(); ?>
+            <?php echo $itemValues; ?>
 
-            <div class="property">
-                <?php $itemSets = $item->itemSets(); ?>
-                <?php if (count($itemSets) > 0): ?>
-                <h4><?php echo $translate('Item sets'); ?></h4>
-                <?php foreach ($itemSets as $itemSet): ?>
-                <div class="value"><a href="<?php echo $escape($itemSet->url()); ?>"><?php echo $itemSet->displayTitle(null, ($filterLocale ? $lang : null)); ?></a></div>
-                <?php endforeach; ?>
-                <?php endif; ?>
-            </div>
+            <!--<div class="property">
+                <?php /*$itemSets = $item->itemSets(); */?>
+                <?php /*if (count($itemSets) > 0): */?>
+                <h4><?php /*echo $translate('Item sets'); */?></h4>
+                <?php /*foreach ($itemSets as $itemSet): */?>
+                <div class="value"><a href="<?php /*echo $escape($itemSet->url()); */?>"><?php /*echo $itemSet->displayTitle(null, ($filterLocale ? $lang : null)); */?></a></div>
+                <?php /*endforeach; */?>
+                <?php /*endif; */?>
+            </div>-->
             <?php if (($this->siteSetting('show_attached_pages', true)) && ($sitePages = $item->sitePages($site->id()))): ?>
             <div class="property">
                 <h4><?php echo $translate('Site pages'); ?></h4>
