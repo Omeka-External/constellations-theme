@@ -30,6 +30,9 @@ $sortHeadings = [
         'value' => 'created'
     ],
 ];
+
+$searchFilters = $this->searchFilters();
+$pageTitle = $searchFilters ? 'Results' : 'Items';
 ?>
 
 <?php if ($itemSetShow): ?>
@@ -41,10 +44,10 @@ $sortHeadings = [
     <div class="item-set-items">
     <?php echo '<h3>' . $escape($translate('Items')) . '</h3>'; ?>
 <?php else: ?>
-    <?php echo $this->pageTitle($translate('Items'), 1); ?>
+    <?php echo $this->pageTitle($translate($pageTitle), 1); ?>
 <?php endif; ?>
 
-<?php echo $this->searchFilters(); ?>
+<?php echo $searchFilters; ?>
 
 <div class="browse-controls">
     <?php echo $this->pagination(); ?>

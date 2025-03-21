@@ -23,9 +23,13 @@ foreach ( $socialNetworks as $social_network ) {
         break;
     }
 }
+
+$controller = $this->params()->fromRoute('controller', null);
+$action = $this->params()->fromRoute('action', null);
 ?>
 
 <footer class="main-footer">
+    <?php if(!($controller === 'Omeka\Controller\Site\Item' && $action === 'search')) : ?>
     <div class="footer-top has-decoration-left">
         <div class="footer-top-container medium-container">
             <?php if ($footerSearchText) : ?>
@@ -39,6 +43,7 @@ foreach ( $socialNetworks as $social_network ) {
             </div>
         </div>
     </div>
+    <?php endif; ?>
 
     <div class="footer-middle">
         <div class="footer-middle-container container">

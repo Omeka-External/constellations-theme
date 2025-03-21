@@ -52,8 +52,8 @@ if ($resourceClassLabel === 'Person') {
     <div class="main-region">
         <div class="metadata <?php echo $resourceClassLabel; ?>">
             <?php if ($itemMedia): ?>
-                <?php foreach ($itemMedia as $media): ?>
-                    <?php if ($media->ingester() === 'html'): ?>
+                <?php foreach ($itemMedia as $key => $media): ?>
+                    <?php if ($media->ingester() === 'html' && $media->displayTitle() === 'Biography' ): ?>
                         <div class="property">
                             <h4><?php echo $media->displayTitle(); ?></h4>
                             <div class="values">
@@ -62,6 +62,8 @@ if ($resourceClassLabel === 'Person') {
                                 </div>
                             </div>
                         </div>
+                        <?php unset($itemMedia[$key]); ?>
+                        <?php break; ?>
                     <?php endif; ?>
                 <?php endforeach; ?>
             <?php endif; ?>
@@ -88,18 +90,34 @@ if ($resourceClassLabel === 'Person') {
             </div>
             <?php endif; ?>
             <?php if ($itemMedia): ?>
-            <div class="media-list">
-                <div class="property">
-                    <dt>Media</dt>
-                    <?php foreach ($itemMedia as $media): ?>
-                        <?php if ($media->ingester() !== 'html'): ?>
-                            <dd class="value">
-                            <?php echo $media->linkPretty(); ?>
-                            </dd>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
+                <div class="media-list">
+                    <div class="property">
+                        <dt>Media</dt>
+                        <?php foreach ($itemMedia as $key => $media): ?>
+                            <?php if ($media->ingester() !== 'html'): ?>
+                                <dd class="value">
+                                <?php echo $media->linkPretty(); ?>
+                                </dd>
+                            <?php unset($itemMedia[$key]); ?>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
-            </div>
+
+                <?php foreach ($itemMedia as $media): ?>
+                    <?php if ($media->ingester() === 'html'): ?>
+                        <div class="property">
+                            <h4><?php echo $media->displayTitle(); ?></h4>
+                            <div class="values">
+                                <div class="value">
+                                    <?php echo $media->render(); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <?php break; ?>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+
             <?php endif; ?>
         </div>
     </div>
