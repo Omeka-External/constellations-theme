@@ -20,6 +20,14 @@ if ($resourceClassLabel === 'Person') {
     $itemValues = preg_replace('/\s*(<[^>]+>)\s*/', '$1', $itemValues);
     $itemValues = str_replace('<h4>Description</h4>', '', $itemValues);
 }
+
+$resourceClass = $item->resourceClass();
+if ($resourceClass) {
+    $term = $resourceClass->term();
+    $parts = explode(':', $term);
+    $slug = strtolower(end($parts));
+    $this->htmlElement('body')->appendAttribute('class', 'resource-class--' . $slug);
+}
 ?>
 
 <div class="resource-heading">
