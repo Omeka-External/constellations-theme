@@ -1,6 +1,6 @@
 {
   "name": "constellations-theme",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An Omeka S Theme.",
   "main": "gulpfile.js",
   "scripts": {
